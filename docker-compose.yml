@@ -1,0 +1,33 @@
+services:
+  web1:
+    image: nginx:stable-alpine
+    volumes:
+      - ./web1/html:/var/www/html
+      - ./nginxconf:/etc/nginx/conf.d
+    networks:
+      - mynetwork
+    container_name: web1
+
+
+  web2:
+    image: nginx:stable-alpine
+    volumes:
+      - ./web2/html:/var/www/html
+      - ./nginxconf:/etc/nginx/conf.d
+    networks:
+      - mynetwork
+    container_name: web2
+
+  haproxy:
+    image: haproxytech/haproxy-alpine:2.4
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy:ro
+    ports: 
+      - 80:80
+      - 8404:8404
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
