@@ -27,6 +27,7 @@ services:
       - 8404:8404
     networks:
       - mynetwork
+    container_name: haproxy
 
 networks:
   mynetwork:
