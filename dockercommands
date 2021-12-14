@@ -1,0 +1,3 @@
+docker run --name web1nginx -d -p 8080:80 web1nginx
+docker run --name web2nginx -d -p 8081:80 web2nginx
+docker run --name haproxy -d -p 80:80 -p 8404:8404 haproxy
