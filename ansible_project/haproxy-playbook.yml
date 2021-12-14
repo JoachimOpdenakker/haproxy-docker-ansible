@@ -1,21 +1,31 @@
-- hosts: webservers
+- hosts: webserver1
   tasks:
           - name: deploy nginx docker container
             docker_container:
-                    image: nginx:stable-alpine
+                    image: joachimopdenakker/systeembeheernginx1
                     name: nginx
                     state: started
                     auto_remove: true
                     ports:
-                            - "8080:80"
-
+                            - "8081:80"
+- hosts: webserver2
+  tasks:
+          - name: deploy nginx docker container
+            docker_container:
+                    image: joachimopdenakker/systeembeheernginx2
+                    name: nginx
+                    state: started
+                    auto_remove: true
+                    ports:
+                            - "8082:80"
 - hosts: loadbalancer
   tasks:
           - name: deploy haproxy docker container
             docker_container:
-                    image: haproxytech/haproxy-alpine:2.4
+                    image: joachimopdenakker/systeembeheerhaproxy
                     name: haproxy
                     state: started
                     autoremove: true
                     ports:
                             - "8080:80"
+                            - "8404:8404"
