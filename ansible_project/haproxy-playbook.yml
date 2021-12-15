@@ -7,7 +7,7 @@
                     state: started
                     auto_remove: true
                     ports:
-                            - "8081:80"
+                            - "80:80"
 - hosts: webserver2
   tasks:
           - name: deploy nginx docker container
@@ -17,7 +17,7 @@
                     state: started
                     auto_remove: true
                     ports:
-                            - "8082:80"
+                            - "80:80"
 - hosts: loadbalancer
   tasks:
           - name: deploy haproxy docker container
@@ -25,7 +25,6 @@
                     image: joachimopdenakker/systeembeheerhaproxy
                     name: haproxy
                     state: started
-                    autoremove: true
                     ports:
-                            - "8080:80"
+                            - "80:80"
                             - "8404:8404"
